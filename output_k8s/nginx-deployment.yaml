@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --out ./output
+    kompose.version: 1.28.0 (c4137012e)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nginx
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert --out ./output
+        kompose.version: 1.28.0 (c4137012e)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/angular-jumpstart-app-network: "true"
+        io.kompose.service: nginx
+    spec:
+      containers:
+        - image: nginx-angular-jumpstart
+          name: nginx-angular-jumpstart
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          resources: {}
+      restartPolicy: Always
+status: {}
